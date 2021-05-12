@@ -1,0 +1,15 @@
+html {
+    font-family: 'Itim', cursive;
+}
+
+header {
+    text-align: center; 
+}
+
+header #title {
+    margin-top: 0%;
+}
+
+#logo {
+    width: 5vw;
+}
