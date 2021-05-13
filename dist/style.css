@@ -3,6 +3,25 @@ html {
     background-color: #2a75bb;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+html, body {
+    height: 99%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+footer {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+
 header {
     text-align: center; 
 }
