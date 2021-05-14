@@ -1,11 +1,11 @@
 html {
     font-family: 'Itim', cursive;
-    background-color: #2a75bb;
 }
 
 body {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
+    margin: 0;
 }
 
 html, body {
@@ -16,27 +16,64 @@ html, body {
     flex: 1 0 auto;
 }
 
-main {
+#navbar-left {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: #dddddd;
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar-left button {
+    border: none;
+    border-radius: 5px;
+    background-color: #cbcbcc; 
+    width: 80%;
+    font-size: 20px;
+    margin-top: 5%;
+    color: black;
+    margin: 0 auto;
+    font-family: 'Itim', cursive;
+}
+
+#navbar-left {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#navbar-left button:hover {
+    cursor: pointer;
+}
+
+#main-content {
     margin: 0 auto;
     width: 60%;
     height: 60%;
     border-radius: 10px;
-    background-color: rgb(236, 236, 236);
-    font-size: 1.2vw;
+    font-size: 25px;
     text-align: center;
     padding: 0.1%;
 }
 
 header {
     text-align: center; 
+    background-color: #2a75bb;
+    display: flex;
+    height: 7%;
 }
 
+
 header #title {
-    margin-top: 0%;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 65px;
 }
 
 #logo {
-    width: 5vw;
+    width: 3vw;
 }
 
 footer {
