@@ -18,17 +18,20 @@
       </header>
       <aside id="navbar-left">
         <h2 class="branches"><span class="branches-icon"></span>Branches</h2>
-        <div class="branches-list">
-          <h3>Main branch</h3>
+        <div class="branch-list">
         </div>
-        <button class="add-branch-btn"><span class="add-branch-icon"></span><p>Add branch</p></button>
+        <form id="branch-form">
+          <label for="newBranchTitle">Branch title: </label><br>
+          <input type="text" id="newBranchTitle" name="newBranchTitle" required><br>
+          <button type="submit" class="add-branch-btn"><span class="add-branch-icon"></span><p>Add branch</p></button>
+        </form>
       </aside>
       <main id="main-content">
         <h2 id="current-branch"></h2>
         <ul class="task-list"></ul>
         <form id="task-form">
-          <label for="newTaskTitle">Title: </label><br>
-          <input type="text" id="newTaskTitle" name="newTaskTitle"><br>
+          <label for="newTaskTitle">Task title: </label><br>
+          <input type="text" id="newTaskTitle" name="newTaskTitle" required><br>
           <button type="submit" class="add-task-btn">Add task</button>
         </form>
       </main>

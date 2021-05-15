@@ -58,7 +58,7 @@ header #title {
     margin-top: 5px;
 }
 
-.task-list li .icon {
+.task-list li .checkbox-icon {
     background: url(../img/checkbox.png) no-repeat;
     background-size: 18px;
     float: left;
@@ -67,6 +67,29 @@ header #title {
     margin-left: 2%;
     margin-right: 1%;
 }
+
+.task-list li .trash-icon {
+    background: url(../img/trash.png) no-repeat;
+    background-size: 25px;
+    float: right;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.task-list li .edit-icon {
+    background: url(../img/edit.png) no-repeat;
+    background-size: 25px;
+    float: right;
+    width: 25px;
+    height: 25px;
+}
+
+.task-list li .modify-icons {
+    margin-left: auto;
+    margin-right: 5%;
+}
+
 
 
 button {
@@ -99,6 +122,11 @@ button {
     align-items: center;
 }
 
+#navbar-left .add-branch-btn p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 #navbar-left .add-branch-icon {
     background: url(../img/add.png) no-repeat;
     background-size: 18px;
@@ -107,7 +135,32 @@ button {
     height: 20px;
 }
 
+.branch-icon {
+    background: url(../img/branch.svg) no-repeat;
+    background-size: 18px;
+    float: left;
+    width: 17%;
+    height: 20px;
+}
 
+.branch-list {
+    font-size: 24px;
+}
+
+.branch-list div {
+    display: flex;
+}
+
+.branches {
+    margin-bottom: 0;
+}
+
+#branch-form { 
+    margin-top: 20px;
+}
+#branch-form label {
+    font-size: 20px;
+}
 
 #task-form .add-task-btn {
     border: none;
@@ -116,9 +169,17 @@ button {
     font-family: 'Itim', cursive;
     font-size: 20px;
     color: black;
+    height: 40px;
+    margin-top: 5px;
+}
+
+#branch-form #newBranchTitle {
+    width: 50%;
+    margin-bottom: 5px;
 }
 
 footer {
     text-align: center;
     flex-shrink: 0;
 }
+
