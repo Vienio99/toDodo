@@ -11,19 +11,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet"> 
   </head>
   <body>
-    <div class="content">
+    <div id="content">
       <header>
         <img src="../img/frame-1s.svg" id="logo">
         <h1 id="title">toDodo</h1>
       </header>
       <aside id="navbar-left">
-        <button>Home</button>
-        <h2>Branches</h2>
+        <h2 class="branches"><span class="branches-icon"></span>Branches</h2>
+        <div class="branches-list">
+          <h3>Main branch</h3>
+        </div>
+        <button class="add-branch-btn"><span class="add-branch-icon"></span><p>Add branch</p></button>
       </aside>
       <main id="main-content">
-        <h2 id="branch"></h2>
-        <ul id="tasks">
-        </ul>
+        <h2 id="current-branch"></h2>
+        <ul class="task-list"></ul>
+        <form id="task-form">
+          <label for="newTaskTitle">Title: </label><br>
+          <input type="text" id="newTaskTitle" name="newTaskTitle"><br>
+          <button type="submit" class="add-task-btn">Add task</button>
+        </form>
       </main>
     </div>
     <footer>Made by Vienio99</footer>

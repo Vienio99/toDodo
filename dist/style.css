@@ -12,52 +12,6 @@ html, body {
     height: 99%;
 }
 
-.content {
-    flex: 1 0 auto;
-}
-
-#navbar-left {
-    height: 100%;
-    width: 15%;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    background-color: #dddddd;
-    display: flex;
-    flex-direction: column;
-}
-
-#navbar-left button {
-    border: none;
-    border-radius: 5px;
-    background-color: #cbcbcc; 
-    width: 80%;
-    font-size: 20px;
-    margin-top: 5%;
-    color: black;
-    margin: 0 auto;
-    font-family: 'Itim', cursive;
-}
-
-#navbar-left {
-    margin: 0 auto;
-    text-align: center;
-}
-
-#navbar-left button:hover {
-    cursor: pointer;
-}
-
-#main-content {
-    margin: 0 auto;
-    width: 60%;
-    height: 60%;
-    border-radius: 10px;
-    font-size: 25px;
-    text-align: center;
-    padding: 0.1%;
-}
-
 header {
     text-align: center; 
     background-color: #2a75bb;
@@ -74,6 +28,94 @@ header #title {
 
 #logo {
     width: 3vw;
+}
+
+#content {
+    flex: 1 0 auto;
+}
+
+
+#main-content {
+    margin: 0 auto;
+    width: 60%;
+    height: 60%;
+    border-radius: 10px;
+    font-size: 25px;
+    text-align: center;
+    padding: 0.1%;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-list li {
+    background-color: #dddddd;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.task-list li .icon {
+    background: url(../img/checkbox.png) no-repeat;
+    background-size: 18px;
+    float: left;
+    width: 18px;
+    height: 17px;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+#navbar-left {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: #dddddd;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#navbar-left .add-branch-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #cbcbcc; 
+    width: 60%;
+    font-size: 20px;
+    color: black;
+    margin: 0 auto;
+    font-family: 'Itim', cursive;
+    display: flex;
+    align-items: center;
+}
+
+#navbar-left .add-branch-icon {
+    background: url(../img/add.png) no-repeat;
+    background-size: 18px;
+    float: left;
+    width: 17%;
+    height: 20px;
+}
+
+
+
+#task-form .add-task-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #dddddd; 
+    font-family: 'Itim', cursive;
+    font-size: 20px;
+    color: black;
 }
 
 footer {
