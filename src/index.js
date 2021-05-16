@@ -3,8 +3,8 @@ import Branch from './modules/branchGenerator';
 
 (function runTododo() {
 
-    let taskForm = document.getElementById('task-form');
-    let branchForm = document.getElementById('branch-form');
+    const taskForm = document.getElementById('task-form');
+    const branchForm = document.getElementById('branch-form');
 
 
     let taskList = [];
@@ -13,25 +13,27 @@ import Branch from './modules/branchGenerator';
     // Form submit listener
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        addNew.task(taskForm);
+        const task = new Todo(taskForm.newTaskTitle.value, '12.03.2012', 'Very important');
+        taskList.push(task);
+        addNew.task(task);
         clearInput.taskForm(taskForm);
+        console.log(taskList);
     });
 
     branchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        addNew.branch(branchForm);
+        const branch = new Branch(branchForm.newBranchTitle.value);
+        branchList.push(branch);
+        addNew.branch(branch);
         clearInput.branchForm(branchForm);
+        console.log(branchList);
     });
-
-
-
-    return { taskList, branchList };
 
 })();
 
-
+// Clear form
 const clearInput = (function() {
-    // Clear form
+
     let taskForm = function(form) {
         form.newTaskTitle.value = '';
     };
@@ -52,7 +54,7 @@ const addNew = (function() {
     const lastTask = tasks.lastChild;
     
     // Add new task to the list
-    let task = function(form) {
+    let task = function(task) {
 
         const newTask = document.createElement('li');
         newTask.setAttribute('class', 'task')
@@ -64,11 +66,6 @@ const addNew = (function() {
             newTask.setAttribute('id', '1')
         }
 
-        // Create new task object
-
-
-        const todo = new Todo(form.newTaskTitle.value, '12.03.2012', 'Very important');
-
         // Add necessary elements
 
         tasks.appendChild(newTask);
@@ -76,9 +73,9 @@ const addNew = (function() {
         checkboxIcon.setAttribute('class', 'checkbox-icon')
         newTask.appendChild(checkboxIcon);
         
-        const newTaskTitle = document.createElement('p');
-        newTaskTitle.textContent = todo.title;
-        newTask.appendChild(newTaskTitle);
+        const taskTitlePara = document.createElement('p');
+        taskTitlePara.textContent = task.title;
+        newTask.appendChild(taskTitlePara);
 
         const modifyIcons = document.createElement('div');
         modifyIcons.setAttribute('class', 'modify-icons');
@@ -97,14 +94,14 @@ const addNew = (function() {
 
     };
 
-    let branch = function(form) {
+    let branch = function(branch) {
         const branchList = document.querySelector('.branch-list')
-        const branch = new Branch(form.newBranchTitle.value);
 
-        const newBranchTitle = document.createElement('p');
 
-        newBranchTitle.textContent = branch.title;
-        branchList.appendChild(newBranchTitle);
+        const branchTitlePara = document.createElement('p');
+
+        branchTitlePara.textContent = branch.title;
+        branchList.appendChild(branchTitlePara);
 
 
     };
