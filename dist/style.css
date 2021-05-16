@@ -125,22 +125,37 @@ button {
 #navbar-left .add-branch-btn p {
     margin-top: 5px;
     margin-bottom: 5px;
+    width: 7vw; 
 }
 
 #navbar-left .add-branch-icon {
     background: url(../img/add.png) no-repeat;
     background-size: 18px;
     float: left;
-    width: 17%;
+    width: 20px;
     height: 20px;
 }
 
-.branch-icon {
-    background: url(../img/branch.svg) no-repeat;
+
+.add-task-icon {
+    background: url(../img/add.png) no-repeat;
     background-size: 18px;
     float: left;
-    width: 17%;
+    width: 20px;
     height: 20px;
+}
+
+.add-task-btn {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+
+.add-task-btn p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100px;
 }
 
 .branch-list {
@@ -152,7 +167,9 @@ button {
 }
 
 .branches {
-    margin-bottom: 0;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 #branch-form { 

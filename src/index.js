@@ -3,30 +3,56 @@ import Branch from './modules/branchGenerator';
 
 (function runTododo() {
 
-    const tasks = document.querySelector('.task-list');
-    const branch = document.getElementById('current-branch');
-    const lastTask = tasks.lastChild;
-
     let taskForm = document.getElementById('task-form');
-    let branchForm = document.getElementById('branch-form')
+    let branchForm = document.getElementById('branch-form');
+
 
     let taskList = [];
+    let branchList = [];
 
     // Form submit listener
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        addNewTask();
-        clearTaskForm();
+        addNew.task(taskForm);
+        clearInput.taskForm(taskForm);
     });
 
     branchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        addNewBranch();
-        clearBranchForm();
+        addNew.branch(branchForm);
+        clearInput.branchForm(branchForm);
     });
 
+
+
+    return { taskList, branchList };
+
+})();
+
+
+const clearInput = (function() {
+    // Clear form
+    let taskForm = function(form) {
+        form.newTaskTitle.value = '';
+    };
+
+    let branchForm = function(form) {
+        console.log(form)
+        form.newBranchTitle.value = '';
+    };
+
+    return { taskForm, branchForm }
+
+})();
+
+
+const addNew = (function() {
+
+    const tasks = document.querySelector('.task-list');
+    const lastTask = tasks.lastChild;
+    
     // Add new task to the list
-    let addNewTask = function() {
+    let task = function(form) {
 
         const newTask = document.createElement('li');
         newTask.setAttribute('class', 'task')
@@ -40,8 +66,8 @@ import Branch from './modules/branchGenerator';
 
         // Create new task object
 
-        const todo = new Todo(taskForm.newTaskTitle.value, '12.03.2012', 'Very important');
-        taskList.push(todo);
+
+        const todo = new Todo(form.newTaskTitle.value, '12.03.2012', 'Very important');
 
         // Add necessary elements
 
@@ -71,32 +97,17 @@ import Branch from './modules/branchGenerator';
 
     };
 
-    let addNewBranch = function() {
+    let branch = function(form) {
         const branchList = document.querySelector('.branch-list')
-        const branch = new Branch(branchForm.newBranchTitle.value);
+        const branch = new Branch(form.newBranchTitle.value);
 
-        const newBranchTitle = document.createElement('div');
-        const newBranchPara = document.createElement('p');
+        const newBranchTitle = document.createElement('p');
 
-        const branchIcon = document.createElement('span');
-        branchIcon.setAttribute('class', 'branch-icon');
-        newBranchTitle.appendChild(branchIcon);
-
-        newBranchPara.textContent = branch.title;
-        newBranchTitle.appendChild(newBranchPara);
+        newBranchTitle.textContent = branch.title;
         branchList.appendChild(newBranchTitle);
 
 
     };
 
-    // Clear form
-    let clearTaskForm = function() {
-        taskForm.newTaskTitle.value = '';
-    };
-
-    let clearBranchForm = function() {
-        branchForm.newBranchTitle.value = '';
-    };
-
-
+    return { task, branch }
 })();
