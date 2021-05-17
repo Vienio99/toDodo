@@ -204,3 +204,7 @@ footer {
     flex-shrink: 0;
 }
 
+
+.active-branch {
+    color: red;
+}

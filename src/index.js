@@ -3,8 +3,6 @@ import Branch from './modules/branchGenerator';
 
 const addNew = (function() {
 
-
-    
     // Add new task to the list
     let task = function(task) {
         const tasks = document.querySelector('.task-list');
@@ -18,7 +16,7 @@ const addNew = (function() {
             newTask.setAttribute('id', Number(lastTask.id) + 1)
         } else {
             newTask.setAttribute('id', '1')
-        }
+        };
 
         // Add necessary elements
 
@@ -56,8 +54,8 @@ const addNew = (function() {
         if (lastBranch) {
             newBranch.setAttribute('id', Number(lastBranch.id) + 1)
         } else {
-            newBranch.setAttribute('id', 1)
-        }
+            newBranch.setAttribute('id', 1);
+        };
 
         newBranch.setAttribute('class', 'branch');
 
@@ -86,8 +84,26 @@ const clearInput = (function() {
 
 })();
 
-const updateTaskList = (function(taskList) {
+const clear = (function() {
+    const tasks = document.querySelector('.task-list');
 
+    let taskList = function() {
+        while (tasks.firstChild) {
+            tasks.removeChild(tasks.firstChild);
+            console.log('done');
+    }};
+
+    return { taskList };
+})();
+
+const show = (function() {
+
+    let taskList = function(taskList) {
+        for (let i = 0; i < taskList.length; i++)
+            addNew.task(taskList[i]);
+    };
+
+    return { taskList };
 })();
 
 
@@ -101,17 +117,17 @@ const updateTaskList = (function(taskList) {
     let taskList = {};
     let branchList = [];
 
-    let currentBranch;
+    let currentBranchId;
+    let currentBranchElement;
 
     // Form submit listener
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const task = new Todo(1, taskForm.newTaskTitle.value, currentBranch, 'Very important');
-        if (!taskList[currentBranch]) {
-            taskList[currentBranch] = [];
+        const task = new Todo(1, taskForm.newTaskTitle.value, currentBranchId, 'Very important');
+        if (!taskList[currentBranchId]) {
+            taskList[currentBranchId] = [];
         }
-        taskList[currentBranch].push(task);
-        console.log(taskList);
+        taskList[currentBranchId].push(task);
         addNew.task(task);
         clearInput.taskForm(taskForm);
     });
@@ -128,12 +144,25 @@ const updateTaskList = (function(taskList) {
     const branches = document.querySelector('.branch-list');
     if (branches) {
         branches.addEventListener('click', (e) => {
-            if (e.target.id > 0) {
-                currentBranch = e.target.id;
-                console.log(currentBranch)
-            }
+            if (e.target.id) {
+
+                // Disactivate style on previous branch
+                if (currentBranchElement) {
+                    currentBranchElement.removeAttribute('class');
+                };
+                clear.taskList();
+
+                // Set new current branch
+                currentBranchId = e.target.id;
+                if (taskList[currentBranchId]) {
+                    show.taskList(taskList[currentBranchId]);
+                    console.log(taskList[currentBranchId])
+                };
+
+                currentBranchElement = e.target;
+                currentBranchElement.setAttribute('class', 'active-branch');
+
+            };
         });
     };
-
-
 })();
