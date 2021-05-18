@@ -9,7 +9,7 @@ const addNew = (function() {
         const lastTask = tasks.lastChild;
         const newTask = document.createElement('li');
 
-        newTask.setAttribute('class', 'task')
+        newTask.classList.add('task');
 
         // Check if there is last task to number it properly
         if (lastTask) {
@@ -22,7 +22,7 @@ const addNew = (function() {
 
         tasks.appendChild(newTask);
         const checkboxIcon = document.createElement('span');
-        checkboxIcon.setAttribute('class', 'checkbox-icon')
+        checkboxIcon.classList.add('checkbox-icon');
         newTask.appendChild(checkboxIcon);
         
         const taskTitlePara = document.createElement('p');
@@ -30,17 +30,17 @@ const addNew = (function() {
         newTask.appendChild(taskTitlePara);
 
         const modifyIcons = document.createElement('div');
-        modifyIcons.setAttribute('class', 'modify-icons');
+        modifyIcons.classList.add('modify-icons');
 
         newTask.append(modifyIcons);
 
         const editIcon = document.createElement('span');
-        editIcon.setAttribute('class', 'edit-icon')
+        editIcon.classList.add('edit-icon');
         modifyIcons.appendChild(editIcon);
 
 
         const trashIcon = document.createElement('span');
-        trashIcon.setAttribute('class', 'trash-icon')
+        trashIcon.classList.add('trash-icon');
         modifyIcons.appendChild(trashIcon);
 
 
@@ -50,14 +50,15 @@ const addNew = (function() {
         const branchList = document.querySelector('.branch-list')
         const lastBranch = branchList.lastChild;
         const newBranch = document.createElement('button');
-        
-        if (lastBranch) {
-            newBranch.setAttribute('id', Number(lastBranch.id) + 1)
-        } else {
+
+
+        if (!lastBranch.id) {
             newBranch.setAttribute('id', 1);
+        } else {
+            newBranch.setAttribute('id', Number(lastBranch.id) + 1);
         };
 
-        newBranch.setAttribute('class', 'branch');
+        newBranch.classList.add('branch');
 
         newBranch.textContent = branch.title;
         branchList.appendChild(newBranch);
@@ -90,7 +91,6 @@ const clear = (function() {
     let taskList = function() {
         while (tasks.firstChild) {
             tasks.removeChild(tasks.firstChild);
-            console.log('done');
     }};
 
     return { taskList };
@@ -116,7 +116,6 @@ const show = (function() {
 
     let taskList = {};
     let branchList = [];
-
     let currentBranchId;
     let currentBranchElement;
 
@@ -124,10 +123,18 @@ const show = (function() {
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const task = new Todo(1, taskForm.newTaskTitle.value, currentBranchId, 'Very important');
-        if (!taskList[currentBranchId]) {
+
+        if (!taskList[currentBranchId] && currentBranchId) {
             taskList[currentBranchId] = [];
-        }
-        taskList[currentBranchId].push(task);
+            taskList[currentBranchId].push(task);
+            console.log('current branch id');
+        } else if (!currentBranchId) {
+            taskList[0] = [];
+            taskList[0].push(task);
+            console.log('no current branch id');
+        };
+
+
         addNew.task(task);
         clearInput.taskForm(taskForm);
     });
@@ -148,7 +155,7 @@ const show = (function() {
 
                 // Disactivate style on previous branch
                 if (currentBranchElement) {
-                    currentBranchElement.removeAttribute('class');
+                    currentBranchElement.classList.remove('active-branch');
                 };
                 clear.taskList();
 
@@ -156,11 +163,11 @@ const show = (function() {
                 currentBranchId = e.target.id;
                 if (taskList[currentBranchId]) {
                     show.taskList(taskList[currentBranchId]);
-                    console.log(taskList[currentBranchId])
+                    console.log(taskList)
                 };
 
                 currentBranchElement = e.target;
-                currentBranchElement.setAttribute('class', 'active-branch');
+                currentBranchElement.classList.add('active-branch');
 
             };
         });
