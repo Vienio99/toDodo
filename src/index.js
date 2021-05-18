@@ -115,6 +115,7 @@ const show = (function() {
 
 
     let taskList = {};
+    taskList[0] = [];
     let branchList = [];
     let currentBranchId;
     let currentBranchElement;
@@ -124,16 +125,14 @@ const show = (function() {
         e.preventDefault();
         const task = new Todo(1, taskForm.newTaskTitle.value, currentBranchId, 'Very important');
 
-        if (!taskList[currentBranchId] && currentBranchId) {
+        if (currentBranchId && taskList[currentBranchId]) {
+            taskList[currentBranchId].push(task);
+        } else if (!taskList[currentBranchId] && currentBranchId) {
             taskList[currentBranchId] = [];
             taskList[currentBranchId].push(task);
-            console.log('current branch id');
-        } else if (!currentBranchId) {
-            taskList[0] = [];
+        } else {
             taskList[0].push(task);
-            console.log('no current branch id');
         };
-
 
         addNew.task(task);
         clearInput.taskForm(taskForm);
