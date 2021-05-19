@@ -1,7 +1,6 @@
 class Branch {
 
-    constructor(id, title) {
-        this.id = id;
+    constructor(title) {
         this.title = title;
     };
 

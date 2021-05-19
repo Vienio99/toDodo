@@ -1,14 +1,14 @@
 import Todo from './modules/todoGenerator';
 import Branch from './modules/branchGenerator';
 
-const addNew = (function() {
+const display = (function() {
 
     // Add new task to the list
     let task = function(task) {
         const tasks = document.querySelector('.task-list');
         const lastTask = tasks.lastChild;
-        const newTask = document.createElement('li');
 
+        const newTask = document.createElement('li');
         newTask.classList.add('task');
 
         // Check if there is last task to number it properly
@@ -42,31 +42,29 @@ const addNew = (function() {
         const trashIcon = document.createElement('span');
         trashIcon.classList.add('trash-icon');
         modifyIcons.appendChild(trashIcon);
-
-
     };
 
+    // Add new branch to the list
     let branch = function(branch) {
         const branchList = document.querySelector('.branch-list')
         const lastBranch = branchList.lastChild;
+
+
         const newBranch = document.createElement('button');
+        newBranch.classList.add('branch');
+        newBranch.textContent = branch.title;
+        branchList.appendChild(newBranch);
 
 
+        // Check if there is last branch to number it properly
         if (!lastBranch.id) {
             newBranch.setAttribute('id', 1);
         } else {
             newBranch.setAttribute('id', Number(lastBranch.id) + 1);
         };
-
-        newBranch.classList.add('branch');
-
-        newBranch.textContent = branch.title;
-        branchList.appendChild(newBranch);
-
-
     };
-
     return { task, branch }
+
 })();
 
 
@@ -85,84 +83,85 @@ const clearInput = (function() {
 
 })();
 
+// Clear tasks display
 const clear = (function() {
     const tasks = document.querySelector('.task-list');
 
-    let taskList = function() {
+    let taskDisplay = function() {
         while (tasks.firstChild) {
             tasks.removeChild(tasks.firstChild);
     }};
 
-    return { taskList };
+    return { taskDisplay };
+
 })();
 
+
+// Display task
 const show = (function() {
 
-    let taskList = function(taskList) {
+    let taskDisplay = function(taskList) {
         for (let i = 0; i < taskList.length; i++)
-            addNew.task(taskList[i]);
+            display.task(taskList[i]);
     };
 
-    return { taskList };
+    return { taskDisplay };
+
 })();
 
 
 
 (function runTododo() {
 
-    const taskForm = document.getElementById('task-form');
-    const branchForm = document.getElementById('branch-form');
+    // Task list with default branch - 0
+    let taskList = {0: [],};
 
-
-    let taskList = {};
-    taskList[0] = [];
     let branchList = [];
-    let currentBranchId;
+    let currentBranchId = 0;
     let currentBranchElement;
 
-    // Form submit listener
+    // Task form listener
+    const taskForm = document.getElementById('task-form');
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const task = new Todo(1, taskForm.newTaskTitle.value, currentBranchId, 'Very important');
+        const task = new Todo(taskForm.newTaskTitle.value, currentBranchId, 'Very important');
 
-        if (currentBranchId && taskList[currentBranchId]) {
-            taskList[currentBranchId].push(task);
-        } else if (!taskList[currentBranchId] && currentBranchId) {
-            taskList[currentBranchId] = [];
+        if (taskList[currentBranchId]) {
             taskList[currentBranchId].push(task);
         } else {
-            taskList[0].push(task);
+            taskList[currentBranchId] = [];
+            taskList[currentBranchId].push(task);
         };
 
-        addNew.task(task);
+        display.task(task);
         clearInput.taskForm(taskForm);
     });
 
+    // Branch form listener
+    const branchForm = document.getElementById('branch-form');
     branchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const branch = new Branch(1, branchForm.newBranchTitle.value);
+        const branch = new Branch(branchForm.newBranchTitle.value);
         branchList.push(branch);
-        addNew.branch(branch);
+        display.branch(branch);
         clearInput.branchForm(branchForm);
     });
 
     // Branch change listener
     const branches = document.querySelector('.branch-list');
-    if (branches) {
-        branches.addEventListener('click', (e) => {
+    branches.addEventListener('click', (e) => {
             if (e.target.id) {
 
-                // Disactivate style on previous branch
+                // Deactivate style on previous branch
                 if (currentBranchElement) {
                     currentBranchElement.classList.remove('active-branch');
                 };
-                clear.taskList();
+                clear.taskDisplay();
 
                 // Set new current branch
                 currentBranchId = e.target.id;
                 if (taskList[currentBranchId]) {
-                    show.taskList(taskList[currentBranchId]);
-                    console.log(taskList)
+                    show.taskDisplay(taskList[currentBranchId]);
                 };
 
                 currentBranchElement = e.target;
@@ -170,5 +169,4 @@ const show = (function() {
 
             };
         });
-    };
 })();
