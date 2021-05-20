@@ -15,7 +15,7 @@ const display = (function() {
         if (lastTask) {
             newTask.setAttribute('id', Number(lastTask.id) + 1)
         } else {
-            newTask.setAttribute('id', '1')
+            newTask.setAttribute('id', '0')
         };
 
         // Add necessary elements
@@ -101,8 +101,7 @@ const clear = (function() {
 const show = (function() {
 
     let taskDisplay = function(taskList) {
-        let taskListLength = Object.keys(taskList).length;
-        for (let i = 1; i < 10; i++) {
+        for (let i = 0; i < taskList.length; i++) {
             if (taskList[i]) {
                 display.task(taskList[i]);
                 console.log(taskList[i])
@@ -119,7 +118,7 @@ const show = (function() {
 (function runTododo() {
 
     // Task list with default branch - 0
-    let taskList = {0: {},};
+    let taskList = {0: [],};
 
     let branchList = [];
     let activeBranchId = 0;
@@ -138,10 +137,10 @@ const show = (function() {
         const lastTaskId = tasks[tasks.length - 1].id;
 
         if (taskList[activeBranchId]) {
-            taskList[activeBranchId][lastTaskId] = task;
+            taskList[activeBranchId].push(task);
         } else {
             taskList[activeBranchId] = {};
-            taskList[activeBranchId][1] = task;
+            taskList[activeBranchId].push(task);
         };
 
 
@@ -184,7 +183,7 @@ const show = (function() {
     tasks.addEventListener('click', (e) => {
         if (e.target.classList[0] === 'trash-icon') {
             let taskId = e.target.parentElement.parentElement.id;
-            delete taskList[activeBranchId][taskId];
+            taskList[activeBranchId].pop(taskId);
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
             console.log(taskList)
