@@ -139,7 +139,7 @@ const show = (function() {
         if (taskList[activeBranchId]) {
             taskList[activeBranchId].push(task);
         } else {
-            taskList[activeBranchId] = {};
+            taskList[activeBranchId] = [];
             taskList[activeBranchId].push(task);
         };
 
@@ -183,7 +183,7 @@ const show = (function() {
     tasks.addEventListener('click', (e) => {
         if (e.target.classList[0] === 'trash-icon') {
             let taskId = e.target.parentElement.parentElement.id;
-            taskList[activeBranchId].pop(taskId);
+            taskList[activeBranchId].splice(taskId, 1);
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
             console.log(taskList)
