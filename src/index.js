@@ -1,5 +1,6 @@
 import Todo from './modules/todoGenerator';
 import Branch from './modules/branchGenerator';
+import { ModuleGraph } from 'webpack';
 
 const display = (function() {
 
@@ -133,9 +134,6 @@ const show = (function() {
         display.task(task);
         clearInput.taskForm(taskForm);
 
-        const tasks = Array.from(document.querySelectorAll('.task'));
-        const lastTaskId = tasks[tasks.length - 1].id;
-
         if (taskList[activeBranchId]) {
             taskList[activeBranchId].push(task);
         } else {
@@ -179,6 +177,7 @@ const show = (function() {
             };
         });
 
+    // Trash icon listener
     const tasks = document.querySelector('.task-list');
     tasks.addEventListener('click', (e) => {
         if (e.target.classList[0] === 'trash-icon') {
@@ -186,6 +185,10 @@ const show = (function() {
             taskList[activeBranchId].splice(taskId, 1);
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
-            console.log(taskList)
-        }});
+        } else if (e.target.classList[0] === 'edit-icon'){
+            let modal = document.querySelector(".modal");
+            let closeBtn = document.querySelector(".close-btn");
+            modal.style.display = 'block';
+        }
+    });
 })();
