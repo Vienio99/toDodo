@@ -43,7 +43,11 @@
             <span class="close-btn">&times;</span>
             <form id="edit-task-form">
               <label for="taskTitle"></label><br>
-              <input type="text" id="taskTitle" name="taskTitle" placeholder="Task name" maxlength="20" required><br>
+              <input type="text" id="taskTitle" name="taskTitle" placeholder="Task title" maxlength="20"><br>
+              <label for="taskStatus">Done</label>
+              <input type="radio" id="taskStatus" name="taskStatus" value="done" required><br>
+              <label for="taskStatus">Not done</label>
+              <input type="radio" id="taskStatus" name="taskStatus" value="not done" required><br>
               <button type="submit" class="edit-task-btn"></span><p>Edit task</p></button>
             </form>
           </div>

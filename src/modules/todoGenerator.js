@@ -7,14 +7,6 @@ class Todo {
         this.status = status;
     };
 
-    get name() {
-        return this.name;
-    };
-
-    set name(value) {
-        this.name = value;
-    };
-
 };
 
 export default Todo;

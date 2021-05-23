@@ -171,6 +171,7 @@ const show = (function() {
         e.preventDefault();
         let editedTask = taskList[activeBranchId][activeTaskId]
         editedTask.title = editTaskForm.taskTitle.value;
+        editedTask.status = editTaskForm.taskStatus.value;
         modal.style.display = "none";
         clearInput.editTaskForm(editTaskForm);
         clear.taskDisplay();
