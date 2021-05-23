@@ -120,6 +120,15 @@ button, .trash-icon, .edit-icon {
     align-items: center;
 }
 
+#navbar-left .add-branch-btn:hover {
+    background-color: #bebebe;
+}
+
+#navbar-left .add-branch-btn:active {
+    background-color: #b4b4b4;
+}
+
+
 #navbar-left .add-branch-btn p {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -200,7 +209,7 @@ button, .trash-icon, .edit-icon {
 
 
 .active-branch {
-    color: red;
+    color:rgb(123, 161, 72)
 }
 
 
@@ -240,6 +249,16 @@ footer {
     height: 40px;
     margin-top: 5px;
 }
+
+.add-task-btn:hover, .task-edit-btn:hover {
+    background-color: #cacaca;
+}
+
+.add-task-btn:active, .task-edit-btn:active {
+    background-color: rgb(185, 185, 185);
+}
+
+
 
 #task-edit-form p {
     margin-top: 7px;

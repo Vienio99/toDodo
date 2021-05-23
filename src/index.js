@@ -32,8 +32,6 @@ const display = (function() {
         };
         checkboxIcon.style.backgroundSize = '18px';
 
-
-
         const taskTitlePara = document.createElement('p');
         taskTitlePara.textContent = task.title;
         newTask.appendChild(taskTitlePara);
@@ -143,7 +141,7 @@ const show = (function() {
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const task = new Todo(taskForm.taskTitle.value, Number(activeBranchId), 'Very important', 'not done');
+        const task = new Todo(taskForm.taskTitle.value, Number(activeBranchId), 'not done');
         display.task(task);
         clearInput.taskForm(taskForm);
 

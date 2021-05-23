@@ -1,9 +1,8 @@
 class Todo {
 
-    constructor(title, branch, priority, status) {
+    constructor(title, branch, status) {
         this.title = title;
         this.branch = branch;
-        this.priority = priority;
         this.status = status;
     };
 
