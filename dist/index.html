@@ -4,49 +4,53 @@
     <meta charset="utf-8" />
     <title>toDodo</title>
     <script src="main.js" defer></script>
-
-
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet"> 
   </head>
   <body>
+    <!-- Content -->
     <div id="content">
+      <!-- Header -->
       <header>
         <img src="../img/frame-1s.svg" id="logo">
         <h1 id="title">toDodo</h1>
       </header>
-      <aside id="navbar-left">
+      <!-- Navbar left -->
+      <navbar id="navbar-left">
         <h2 class="branches">Branches</h2>
         <div class="branch-list">
           <button id="0" class="branch">Main</button>
         </div>
         <form id="branch-form">
-          <label for="newBranchTitle"></label><br>
-          <input type="text" id="newBranchTitle" name="newBranchTitle" placeholder="Branch title" maxlength="20" required><br>
+          <label for="branchTitle"></label><br>
+          <input type="text" id="branchTitle" name="branchTitle" placeholder="Branch title" maxlength="20" required><br>
           <button type="submit" class="add-branch-btn"><span class="add-branch-icon"></span><p>Add branch</p></button>
         </form>
-      </aside>
+      </navbar>
+      <!-- Main content -->
       <main id="main-content">
         <h2 id="current-branch"></h2>
         <ul class="task-list"></ul>
         <form id="task-form">
-          <label for="newTaskTitle"></label><br>
-          <input type="text" id="newTaskTitle" name="newTaskTitle" placeholder="Task title" maxlength="50" required><br>
+          <label for="taskTitle"></label><br>
+          <input type="text" id="taskTitle" name="taskTitle" placeholder="Task title" maxlength="50" required><br>
           <button type="submit" class="add-task-btn"><span class="add-task-icon"></span><p>Add task</p></button>
         </form>
+        <!-- Modal form -->
         <div class="modal">
           <div class="modal-content">
             <span class="close-btn">&times;</span>
             <form id="edit-task-form">
-              <label for="editTaskName"></label><br>
-              <input type="text" id="editTaskName" name="editTaskName" placeholder="Task name" maxlength="20" required><br>
+              <label for="taskTitle"></label><br>
+              <input type="text" id="taskTitle" name="taskTitle" placeholder="Task name" maxlength="20" required><br>
               <button type="submit" class="edit-task-btn"></span><p>Edit task</p></button>
             </form>
           </div>
         </div>
       </main>
     </div>
+    <!-- Footer -->
     <footer>Made by Vienio99</footer>
   </body>
 </html>

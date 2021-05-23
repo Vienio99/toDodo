@@ -24,7 +24,16 @@ const display = (function() {
         const checkboxIcon = document.createElement('span');
         checkboxIcon.classList.add('checkbox-icon');
         newTask.appendChild(checkboxIcon);
-        
+
+        if (task.status === 'not done') {
+            checkboxIcon.style.background = 'url(../img/checkbox.png) no-repeat';
+        } else {
+            checkboxIcon.style.background = 'url(../img/checkbox-checked.png) no-repeat';
+        };
+        checkboxIcon.style.backgroundSize = '18px';
+
+
+
         const taskTitlePara = document.createElement('p');
         taskTitlePara.textContent = task.title;
         newTask.appendChild(taskTitlePara);
@@ -72,14 +81,18 @@ const display = (function() {
 const clearInput = (function() {
 
     let taskForm = function(form) {
-        form.newTaskTitle.value = '';
+        form.taskTitle.value = '';
     };
 
     let branchForm = function(form) {
-        form.newBranchTitle.value = '';
+        form.branchTitle.value = '';
     };
 
-    return { taskForm, branchForm }
+    let editTaskForm = function(form) {
+        form.taskTitle.value = '';
+    }
+
+    return { taskForm, branchForm, editTaskForm }
 
 })();
 
@@ -104,7 +117,6 @@ const show = (function() {
         for (let i = 0; i < taskList.length; i++) {
             if (taskList[i]) {
                 display.task(taskList[i]);
-                console.log(taskList[i])
             };
         };
     };
@@ -131,7 +143,7 @@ const show = (function() {
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const task = new Todo(taskForm.newTaskTitle.value, Number(activeBranchId), 'Very important');
+        const task = new Todo(taskForm.taskTitle.value, Number(activeBranchId), 'Very important', 'not done');
         display.task(task);
         clearInput.taskForm(taskForm);
 
@@ -147,7 +159,7 @@ const show = (function() {
     const branchForm = document.getElementById('branch-form');
     branchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const branch = new Branch(branchForm.newBranchTitle.value);
+        const branch = new Branch(branchForm.branchTitle.value);
         branchList.push(branch);
         display.branch(branch);
         clearInput.branchForm(branchForm);
@@ -158,9 +170,11 @@ const show = (function() {
     editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         let editedTask = taskList[activeBranchId][activeTaskId]
-        console.log(editedTask.title)
-        editedTask.title = editTaskForm.editTaskName.value;
-        console.log(editedTask.title)
+        editedTask.title = editTaskForm.taskTitle.value;
+        modal.style.display = "none";
+        clearInput.editTaskForm(editTaskForm);
+        clear.taskDisplay();
+        show.taskDisplay(taskList[activeBranchId]);
     });
 
 
@@ -189,17 +203,28 @@ const show = (function() {
     let modal = document.querySelector(".modal");
 
 
-    // Trash and edit icon listener
+    // Trash, checkbox and edit icon listener
     const tasks = document.querySelector('.task-list');
     tasks.addEventListener('click', (e) => {
-        if (e.target.classList[0] === 'trash-icon') {
+        const target = e.target.classList[0];
+        if (target === 'trash-icon') {
             let taskId = e.target.parentElement.parentElement.id;
             taskList[activeBranchId].splice(taskId, 1);
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
-        } else if (e.target.classList[0] === 'edit-icon'){
+        } else if (target === 'edit-icon') {
             modal.style.display = 'block';
             activeTaskId = e.target.parentElement.parentElement.id;
+        } else if (target === 'checkbox-icon') {
+            let clickedTaskId = e.target.parentElement.id;
+            let currentTask = taskList[activeBranchId][clickedTaskId];
+            if (currentTask.status === 'not done') {
+                currentTask.status = 'done';
+            } else {
+                currentTask.status = 'not done';
+            };
+            clear.taskDisplay();
+            show.taskDisplay(taskList[activeBranchId]);
         }
     });
 
@@ -207,16 +232,13 @@ const show = (function() {
     let closeBtn = document.querySelector(".close-btn");
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
-        clear.taskDisplay();
-        show.taskDisplay(taskList[activeBranchId]);
     });
 
     window.onclick = function(e){
         if (e.target == modal){
           modal.style.display = "none"
-          clear.taskDisplay();
-          show.taskDisplay(taskList[activeBranchId]);
         };
       };
+
 
 })();

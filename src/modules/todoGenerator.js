@@ -14,6 +14,7 @@ class Todo {
     set name(value) {
         this.name = value;
     };
+
 };
 
 export default Todo;

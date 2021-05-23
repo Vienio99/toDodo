@@ -193,7 +193,7 @@ button, .trash-icon, .edit-icon {
     margin-top: 5px;
 }
 
-#branch-form #newBranchTitle {
+#branch-form #branchTitle {
     width: 50%;
     margin-bottom: 5px;
 }
