@@ -169,8 +169,11 @@ const show = (function() {
     const editTaskForm = document.getElementById('edit-task-form');
     editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        let editedTask = taskList[activeBranchId][activeTaskId]
-        editedTask.title = editTaskForm.taskTitle.value;
+        let editedTask = taskList[activeBranchId][activeTaskId];
+        if (editTaskForm.taskTitle.value) {
+            editedTask.title = editTaskForm.taskTitle.value;
+            console.log(editTaskForm.taskTitle.value)
+        };
         editedTask.status = editTaskForm.taskStatus.value;
         modal.style.display = "none";
         clearInput.editTaskForm(editTaskForm);
