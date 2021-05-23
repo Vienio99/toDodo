@@ -182,7 +182,7 @@ button, .trash-icon, .edit-icon {
     font-size: 20px;
 }
 
-.add-task-btn, .edit-task-btn {
+.add-task-btn, .task-edit-btn {
     border: none;
     border-radius: 10px;
     background-color: #dddddd; 
@@ -236,12 +236,12 @@ footer {
     animation-duration: 0.4s
 }
 
-#edit-task-form .edit-task-btn {
+#task-edit-form .task-edit-btn {
     height: 40px;
     margin-top: 5px;
 }
 
-#edit-task-form p {
+#task-edit-form p {
     margin-top: 7px;
     margin-bottom: 7px;
 }

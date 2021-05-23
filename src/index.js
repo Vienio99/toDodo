@@ -88,11 +88,11 @@ const clearInput = (function() {
         form.branchTitle.value = '';
     };
 
-    let editTaskForm = function(form) {
+    let taskEditForm = function(form) {
         form.taskTitle.value = '';
     }
 
-    return { taskForm, branchForm, editTaskForm }
+    return { taskForm, branchForm, taskEditForm }
 
 })();
 
@@ -166,17 +166,16 @@ const show = (function() {
     });
 
     //   Task edit form
-    const editTaskForm = document.getElementById('edit-task-form');
-    editTaskForm.addEventListener('submit', (e) => {
+    const taskEditForm = document.getElementById('task-edit-form');
+    taskEditForm.addEventListener('submit', (e) => {
         e.preventDefault();
         let editedTask = taskList[activeBranchId][activeTaskId];
-        if (editTaskForm.taskTitle.value) {
-            editedTask.title = editTaskForm.taskTitle.value;
-            console.log(editTaskForm.taskTitle.value)
+        if (taskEditForm.taskTitle.value) {
+            editedTask.title = taskEditForm.taskTitle.value;
         };
-        editedTask.status = editTaskForm.taskStatus.value;
+        editedTask.status = taskEditForm.taskStatus.value;
         modal.style.display = "none";
-        clearInput.editTaskForm(editTaskForm);
+        clearInput.taskEditForm(taskEditForm);
         clear.taskDisplay();
         show.taskDisplay(taskList[activeBranchId]);
     });
