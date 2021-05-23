@@ -1,6 +1,5 @@
 import Todo from './modules/todoGenerator';
 import Branch from './modules/branchGenerator';
-import { ModuleGraph } from 'webpack';
 
 const display = (function() {
 
@@ -120,10 +119,10 @@ const show = (function() {
 
     // Task list with default branch - 0
     let taskList = {0: [],};
-
     let branchList = [];
+    
     let activeBranchId = 0;
-    let activeBranchElement;
+    let activeBranch;
 
     // Task form listener
     const taskForm = document.getElementById('task-form');
@@ -140,8 +139,6 @@ const show = (function() {
             taskList[activeBranchId] = [];
             taskList[activeBranchId].push(task);
         };
-
-
     });
 
     // Branch form listener
@@ -154,14 +151,21 @@ const show = (function() {
         clearInput.branchForm(branchForm);
     });
 
+    //   Task edit form
+    const editTaskForm = document.getElementById('edit-task-form');
+    editTaskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
+
+
     // Branch change listener
     const branches = document.querySelector('.branch-list');
     branches.addEventListener('click', (e) => {
             if (e.target.id) {
 
                 // Deactivate style on previous branch
-                if (activeBranchElement) {
-                    activeBranchElement.classList.remove('active-branch');
+                if (activeBranch) {
+                    activeBranch.classList.remove('active-branch');
                 };
                 clear.taskDisplay();
 
@@ -171,11 +175,13 @@ const show = (function() {
                     show.taskDisplay(taskList[activeBranchId]);
                 };
 
-                activeBranchElement = e.target;
-                activeBranchElement.classList.add('active-branch');
+                activeBranch = e.target;
+                activeBranch.classList.add('active-branch');
 
             };
         });
+    let modal = document.querySelector(".modal");
+
 
     // Trash icon listener
     const tasks = document.querySelector('.task-list');
@@ -186,9 +192,20 @@ const show = (function() {
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
         } else if (e.target.classList[0] === 'edit-icon'){
-            let modal = document.querySelector(".modal");
-            let closeBtn = document.querySelector(".close-btn");
             modal.style.display = 'block';
         }
     });
+
+    // Close modal
+    let closeBtn = document.querySelector(".close-btn");
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.onclick = function(e){
+        if (e.target == modal){
+          modal.style.display = "none"
+        };
+      };
+
 })();

@@ -7,22 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vienio99/toDodo.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vienio99/toDodo/issues"
+  },
+  "homepage": "https://github.com/Vienio99/toDodo#readme",
   "devDependencies": {
     "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0",
-    "webpack-node-externals": "^3.0.0"
-  },
-  "dependencies": {
-    "buffer": "^6.0.3",
-    "crypto": "^1.0.1",
-    "http": "*",
-    "https": "^1.0.0",
-    "node-polyfill-webpack-plugin": "^1.1.2",
-    "path-browserify": "^1.0.1",
-    "request": "^2.79.0",
-    "util": "^0.12.3"
+    "webpack-cli": "^4.7.0"
   }
 }

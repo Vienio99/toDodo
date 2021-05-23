@@ -97,7 +97,7 @@ button, .trash-icon, .edit-icon {
 #navbar-left {
     height: 100%;
     width: 15%;
-    position: fixed;
+    float: left;
     z-index: 1;
     left: 0;
     background-color: #dddddd;
@@ -182,7 +182,7 @@ button, .trash-icon, .edit-icon {
     font-size: 20px;
 }
 
-#task-form .add-task-btn {
+.add-task-btn, .edit-task-btn {
     border: none;
     border-radius: 10px;
     background-color: #dddddd; 
@@ -222,16 +222,28 @@ footer {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-content {
     position: relative; 
     background-color: white;
     padding: 20px; 
     margin: auto; 
-    width: 75%;  
+    width: 30%;  
+    border-radius: 10px;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+#edit-task-form .edit-task-btn {
+    height: 40px;
+    margin-top: 5px;
+}
+
+#edit-task-form p {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 .close-btn {
@@ -239,6 +251,7 @@ footer {
     color: lightgray; 
     font-size: 24px;  
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close-btn:hover {
