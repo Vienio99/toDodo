@@ -120,6 +120,8 @@ const show = (function() {
     // Task list with default branch - 0
     let taskList = {0: [],};
     let branchList = [];
+
+    let activeTaskId;
     
     let activeBranchId = 0;
     let activeBranch;
@@ -155,6 +157,10 @@ const show = (function() {
     const editTaskForm = document.getElementById('edit-task-form');
     editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        let editedTask = taskList[activeBranchId][activeTaskId]
+        console.log(editedTask.title)
+        editedTask.title = editTaskForm.editTaskName.value;
+        console.log(editedTask.title)
     });
 
 
@@ -183,7 +189,7 @@ const show = (function() {
     let modal = document.querySelector(".modal");
 
 
-    // Trash icon listener
+    // Trash and edit icon listener
     const tasks = document.querySelector('.task-list');
     tasks.addEventListener('click', (e) => {
         if (e.target.classList[0] === 'trash-icon') {
@@ -193,6 +199,7 @@ const show = (function() {
             show.taskDisplay(taskList[activeBranchId]);
         } else if (e.target.classList[0] === 'edit-icon'){
             modal.style.display = 'block';
+            activeTaskId = e.target.parentElement.parentElement.id;
         }
     });
 
@@ -200,11 +207,15 @@ const show = (function() {
     let closeBtn = document.querySelector(".close-btn");
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
+        clear.taskDisplay();
+        show.taskDisplay(taskList[activeBranchId]);
     });
 
     window.onclick = function(e){
         if (e.target == modal){
           modal.style.display = "none"
+          clear.taskDisplay();
+          show.taskDisplay(taskList[activeBranchId]);
         };
       };
 
