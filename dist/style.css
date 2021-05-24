@@ -78,15 +78,15 @@ button, .trash-icon, .edit-icon {
     float: right;
     width: 25px;
     height: 25px;
-    margin-right: 10px;
 }
 
 .task-list li .edit-icon {
     background: url(../img/edit.png) no-repeat;
     background-size: 25px;
-    float: right;
+    float: left;
     width: 25px;
     height: 25px;
+    margin-right: 10px;
 }
 
 .task-list li .modify-icons {
