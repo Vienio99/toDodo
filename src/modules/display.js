@@ -76,7 +76,18 @@ const display = (function() {
             newBranch.setAttribute('id', Number(lastBranch.id) + 1);
         };
     };
-    return { task, branch }
+
+    // Display tasks
+
+    let tasks = function(taskList) {
+        for (let i = 0; i < taskList.length; i++) {
+            if (taskList[i]) {
+                task(taskList[i]);
+            };
+        };
+    };
+
+    return { tasks, branch }
 
 })();
 

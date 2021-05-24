@@ -33,19 +33,19 @@ const clear = (function() {
 })();
 
 
-// Display tasks
-const show = (function() {
 
-    let taskDisplay = function(taskList) {
-        for (let i = 0; i < taskList.length; i++) {
-            if (taskList[i]) {
-                display.task(taskList[i]);
-            };
-        };
+
+// Add task to the list
+
+// Display tasks
+const add = (function() {
+
+    let task = function(branch, task) {
+        branch.push(task);
     };
 
-    return { taskDisplay };
+    return { task };
 
 })();
 
-export { clearInput, clear, show }
+export { clearInput, clear, add }

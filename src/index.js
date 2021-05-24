@@ -1,7 +1,7 @@
 import Todo from './modules/todoGenerator';
 import Branch from './modules/branchGenerator';
 import display from './modules/display';
-import { clear, clearInput, show } from './modules/helperFunctions';
+import { clear, clearInput, add } from './modules/helperFunctions';
 
 (function runTododo() {
 
@@ -20,15 +20,11 @@ import { clear, clearInput, show } from './modules/helperFunctions';
         e.preventDefault();
 
         const task = new Todo(taskForm.taskTitle.value, Number(activeBranchId), 'not done');
-        display.task(task);
         clearInput.taskForm(taskForm);
 
-        if (taskList[activeBranchId]) {
-            taskList[activeBranchId].push(task);
-        } else {
-            taskList[activeBranchId] = [];
-            taskList[activeBranchId].push(task);
-        };
+        add.task(taskList[activeBranchId], task);
+        clear.taskDisplay();
+        display.tasks(taskList[activeBranchId]);
     });
 
     // Branch form listener
@@ -55,7 +51,7 @@ import { clear, clearInput, show } from './modules/helperFunctions';
         modal.style.display = "none";
         clearInput.taskEditForm(taskEditForm);
         clear.taskDisplay();
-        show.taskDisplay(taskList[activeBranchId]);
+        display.tasks(taskList[activeBranchId]);
     });
 
 
@@ -72,8 +68,11 @@ import { clear, clearInput, show } from './modules/helperFunctions';
 
                 // Set new current branch
                 activeBranchId = e.target.id;
+                console.log(taskList[activeBranchId])
                 if (taskList[activeBranchId]) {
-                    show.taskDisplay(taskList[activeBranchId]);
+                    display.tasks(taskList[activeBranchId]);
+                } else {
+                    taskList[activeBranchId] = [];
                 };
 
                 activeBranch = e.target;
@@ -90,12 +89,14 @@ import { clear, clearInput, show } from './modules/helperFunctions';
     const tasks = document.querySelector('.task-list');
     tasks.addEventListener('click', (e) => {
         const target = e.target.classList[0];
-        let clickedTaskId = e.target.parentElement.parentElement.id;
+        let clickedTaskId = e.target.parentElement.id;
+        console.log(clickedTaskId)
         if (target === 'trash-icon') {
+            clickedTaskId = e.target.parentElement.parentElement.id;
             taskList[activeBranchId].splice(clickedTaskId, 1);
         } else if (target === 'edit-icon') {
             modal.style.display = 'block';
-            activeTaskId = clickedTaskId;
+            activeTaskId = e.target.parentElement.parentElement.id;
         } else if (target === 'checkbox-icon') {
             let currentTask = taskList[activeBranchId][clickedTaskId];
             if (currentTask.status === 'not done') {
@@ -105,7 +106,7 @@ import { clear, clearInput, show } from './modules/helperFunctions';
             };
         };
         clear.taskDisplay();
-        show.taskDisplay(taskList[activeBranchId]);
+        display.tasks(taskList[activeBranchId]);
     });
 
     // Close modal
