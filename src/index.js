@@ -9,6 +9,10 @@ const display = (function() {
         const lastTask = tasks.lastChild;
 
         const newTask = document.createElement('li');
+        if (task.priority === 'important') {
+            newTask.classList.add('important');
+        };
+
         newTask.classList.add('task');
 
         // Check if there is last task to number it properly
@@ -35,6 +39,11 @@ const display = (function() {
         const taskTitlePara = document.createElement('p');
         taskTitlePara.textContent = task.title;
         newTask.appendChild(taskTitlePara);
+
+        const taskDate = document.createElement('p');
+        taskDate.classList.add('date');
+        taskDate.textContent = task.date;
+        newTask.appendChild(taskDate);
 
         const modifyIcons = document.createElement('div');
         modifyIcons.classList.add('modify-icons');
@@ -171,7 +180,9 @@ const show = (function() {
         if (taskEditForm.taskTitle.value) {
             editedTask.title = taskEditForm.taskTitle.value;
         };
+        editedTask.date = taskEditForm.taskDate.value;
         editedTask.status = taskEditForm.taskStatus.value;
+        editedTask.priority = taskEditForm.taskPriority.value;
         modal.style.display = "none";
         clearInput.taskEditForm(taskEditForm);
         clear.taskDisplay();
@@ -201,7 +212,9 @@ const show = (function() {
 
             };
         });
-    let modal = document.querySelector(".modal");
+
+        
+    const modal = document.querySelector(".modal");
 
 
     // Trash, checkbox and edit icon listener
@@ -226,7 +239,7 @@ const show = (function() {
             };
             clear.taskDisplay();
             show.taskDisplay(taskList[activeBranchId]);
-        }
+        };
     });
 
     // Close modal

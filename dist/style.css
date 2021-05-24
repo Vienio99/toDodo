@@ -258,7 +258,9 @@ footer {
     background-color: rgb(185, 185, 185);
 }
 
-
+#task-edit-form div {
+    margin-bottom: 20px; 
+}
 
 #task-edit-form p {
     margin-top: 7px;
@@ -285,4 +287,13 @@ footer {
 @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
+}
+
+.date {
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.important {
+    border: 2px solid red;
 }
