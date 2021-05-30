@@ -72,6 +72,7 @@ button, .trash-icon, .edit-icon {
     margin-right: 1%;
 }
 
+
 .task-list li .trash-icon {
     background: url(../img/trash.png) no-repeat;
     background-size: 25px;

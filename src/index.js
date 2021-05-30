@@ -77,7 +77,6 @@ import { clear, clearInput, add } from './modules/helperFunctions';
 
                 activeBranch = e.target;
                 activeBranch.classList.add('active-branch');
-
             };
         });
 

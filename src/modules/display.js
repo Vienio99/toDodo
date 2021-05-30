@@ -68,6 +68,18 @@ const display = (function() {
         newBranch.textContent = branch.title;
         branchList.appendChild(newBranch);
 
+        const modifyIcons = document.createElement('div');
+        modifyIcons.classList.add('modify-icons');
+        newBranch.appendChild(modifyIcons);
+
+        const editIcon = document.createElement('span');
+        editIcon.classList.add('edit-icon');
+        modifyIcons.appendChild(editIcon);
+
+        const trashIcon = document.createElement('span');
+        trashIcon.classList.add('trash-icon');
+        modifyIcons.appendChild(trashIcon);
+
 
         // Check if there is last branch to number it properly
         if (!lastBranch.id) {
