@@ -1,9 +1,7 @@
 class Branch {
-
-    constructor(title) {
-        this.title = title;
-    };
-
+  constructor (title) {
+    this.title = title
+  };
 };
 
-export default Branch;
+export default Branch
